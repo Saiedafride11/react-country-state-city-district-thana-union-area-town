@@ -1,38 +1,46 @@
-.App {
+.country-state-main-section {
+  background-color: #e8e8e8;
+  padding: 40px;
+}
+.country-state-main-section .my-info {
   text-align: center;
+  margin-bottom: 30px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.country-state-main-section .my-info h2 {
+  margin: 0px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.country-state-main-section .country-state-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.country-state-main-section .country-state-container form label {
+  font-weight: 500;
 }
-
-.App-link {
-  color: #61dafb;
+.country-state-main-section .country-state-container form input {
+  width: 98.5%;
+  padding: 6px;
+  margin: 5px 0px 10px;
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  outline: none;
+  /* Firefox */
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.country-state-main-section .country-state-container form input::-webkit-outer-spin-button, .country-state-main-section .country-state-container form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+.country-state-main-section .country-state-container form input[type=number] {
+  -moz-appearance: textfield;
+}
+.country-state-main-section .country-state-container form select {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0px 10px;
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  outline: none;
+}
+.country-state-main-section .country-state-container form select option:first-child {
+  display: none !important;
+}/*# sourceMappingURL=App.css.map */

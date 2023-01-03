@@ -1,5 +1,15 @@
+// :root{
+//   --color3:#157ed2;
+//   --color9:#eaeaea;
+// }
+// color: var(--color3);
+// border-bottom: 1px solid var(--color9);
+
+$color1: #fff;
+$color2: #157ed2;
+$color3: #eaeaea;
+
 .country-state-main-section {
-  // text-align: center;
   background-color: #e8e8e8;
   padding: 40px;
 
@@ -15,27 +25,22 @@
   .country-state-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-gap: 50px;
 
-    // .country-state-container-left{
-    //   background-color: red;
-    // }
-    // .country-state-container-right{
-    //   background-color: green;
-    // }
-
-    form{
-
-      label{
-        font-weight: 500;
+    .without-suggest{
+      h4{
+        margin: 5px 0px 5px;
       }
+
       input{
-        width: 98.5%;
-        padding: 6px;
-        margin: 5px 0px 10px;
-        border: 1px solid #b5b5b5;
-        border-radius: 5px;
+        width: 98%;
+        margin: 0px 0px 10px;
+        padding: 10px;
+        background-color: $color1;
+        border: none;
         outline: none;
+        border-radius: 3px;
+        cursor: pointer;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button { 
@@ -46,19 +51,81 @@
           -moz-appearance: textfield;
         }
       }
-      select{
-        width: 100%;
-        padding: 5px;
-        margin: 5px 0px 10px;
-        border: 1px solid #b5b5b5;
-        border-radius: 5px;
-        outline: none;
+    }
 
-        option{
-          &:first-child{
-            display: none !important;
-          }
+  .show-suggest-container{
+      position: relative;
+
+      h4{
+        margin: 0px;
+      }
+
+      p{
+          width: 98%;
+          background-color: $color1;
+          padding: 6px 10px;
+          margin: 5px 0px 15px;
+          border-radius: 3px;
+          cursor: pointer;
+      }
+
+      input{
+        width: 100%;
+        padding:10px;
+        border: none;
+        outline: none;
+      }
+
+      .show-suggest-area{
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        z-index: 99;
+        box-shadow: 0 2px 4px 0 rgb(0 0 0 / 21%);
+
+        .show-suggest{
+            background-color: $color1;
+            margin-top: 1px;
+            border-radius: 3px;
+            max-height: 335px;
+            overflow-y: auto;
+      
+            .suggest-btn{
+                width: 100%;
+                height: 30px;
+                border: none;
+                outline: none;
+                background: transparent;
+                cursor: pointer;
+                text-align: left;
+                font-size: 14px;
+                font-family: 'Open Sans', sans-serif;
+                border-bottom: 1px solid $color3;
+          
+                .suggest-line-climb{
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;  
+                    overflow: hidden;
+                }
+          
+                &:hover{
+                  color: $color1;
+                  background-color: $color2;
+                }
+            }
         }
+      }
+    }
+
+    .copy-billing-address{
+      display: flex;
+      align-items:center;
+
+      h5{
+        color: $color2;
+        margin-left: 10px;
+        cursor: pointer;
       }
     }
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import fakeData from "./fakeData.json"
 
-const RightSide = ({billingAddress}) => {
+const RightSide = ({billingAddress, billingFilterData}) => {
   const [countries, setCountries] = useState(fakeData);
   const [address, setAddress] = useState({});
   const [searchText, setSearchText] = useState("");
@@ -30,40 +30,37 @@ const RightSide = ({billingAddress}) => {
   // ------------------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------------------
   const handleResult = (item) => {
-    setSearchText("");
-    setCountries(fakeData);
-    // setFilterData({
-    //   country: {},
-    //   state: {},
-    //   district: {},
-    //   city: {},
-    //   town: {},
-    //   zipcode: {},
-    //   village: {}
-    // });
-    
-    if(item === "country"){
-      setSuggestBox({...suggestBox, country: !suggestBox.country, state: false, district: false, city: false, town: false, zipcode: false, village: false});
+      setSearchText("");
+      setCountries(fakeData);
+      
+      if(item === "country"){
+        setSuggestBox({...suggestBox, country: !suggestBox.country, state: false, district: false, city: false, town: false, zipcode: false, village: false});
+      }
+      if(item === "state"){
+        setSuggestBox({...suggestBox, state: !suggestBox.state, country: false, district: false, city: false, town: false, zipcode: false, village: false});
+        setFilterData({...filterData, country: countries?.find(data => data.country === filterData?.country?.country)})
+      }
+      if(item === "district"){
+        setSuggestBox({...suggestBox, district: !suggestBox.district, country: false, state: false, city: false, town: false, zipcode: false, village: false});
+        setFilterData({...filterData, state: filterData?.country?.state?.find(data => data.name === filterData?.state?.name)})
+      }
+      if(item === "city"){
+        setSuggestBox({...suggestBox, city: !suggestBox.city, country: false, state: false, district: false, town: false, zipcode: false, village: false});
+        setFilterData({...filterData, district: filterData?.state?.district?.find(data => data.name === filterData?.district?.name)})
+      }
+      if(item === "town"){
+        setSuggestBox({...suggestBox, town: !suggestBox.town, country: false, state: false, district: false, city: false, zipcode: false, village: false});
+        setFilterData({...filterData, city: filterData?.district?.city?.find(data => data.name === filterData?.city?.name)})
+      }
+      if(item === "zipcode"){
+        setSuggestBox({...suggestBox, zipcode: !suggestBox.zipcode, country: false, state: false, district: false, city: false, town: false, village: false});
+        setFilterData({...filterData, town: filterData?.city?.town?.find(data => data.name === filterData?.town?.name)})
+      }
+      if(item === "village"){
+        setSuggestBox({...suggestBox, village: !suggestBox.village, country: false, state: false, district: false, city: false, town: false, zipcode: false});
+        setFilterData({...filterData, zipcode: filterData?.town?.zipcode?.find(data => data.name === filterData?.zipcode?.name)})
+      }
     }
-    if(item === "state"){
-      setSuggestBox({...suggestBox, state: !suggestBox.state, country: false, district: false, city: false, town: false, zipcode: false, village: false});
-    }
-    if(item === "district"){
-      setSuggestBox({...suggestBox, district: !suggestBox.district, country: false, state: false, city: false, town: false, zipcode: false, village: false});
-    }
-    if(item === "city"){
-      setSuggestBox({...suggestBox, city: !suggestBox.city, country: false, state: false, district: false, town: false, zipcode: false, village: false});
-    }
-    if(item === "town"){
-      setSuggestBox({...suggestBox, town: !suggestBox.town, country: false, state: false, district: false, city: false, zipcode: false, village: false});
-    }
-    if(item === "zipcode"){
-      setSuggestBox({...suggestBox, zipcode: !suggestBox.zipcode, country: false, state: false, district: false, city: false, town: false, village: false});
-    }
-    if(item === "village"){
-      setSuggestBox({...suggestBox, village: !suggestBox.village, country: false, state: false, district: false, city: false, town: false, zipcode: false});
-    }
-  }
 
   // ------------------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------------------
@@ -113,12 +110,12 @@ const RightSide = ({billingAddress}) => {
     if(item === "country"){
       setAddress({ ...address, country: value, state: "", district: "", city: "", town: "", zipcode: "", village: ""})
       setSuggestBox({...suggestBox, country: false});
-      setFilterData({...filterData, country: countries.find(data => data.country === value)})
+      setFilterData({...filterData, country: countries?.find(data => data.country === value)})
     }
     else if(item === "state"){
       setAddress({...address, state: value, district: "", city: "", town: "", zipcode: "", village: ""})
       setSuggestBox({...suggestBox, state: false});
-      setFilterData({...filterData, state: filterData?.country?.state.find(data => data.name === value)})
+      setFilterData({...filterData, state: filterData?.country?.state?.find(data => data.name === value)})
     }
     else if(item === "district"){
       setAddress({...address, district: value, city: "", town: "", zipcode: "", village: ""})
@@ -170,13 +167,16 @@ const RightSide = ({billingAddress}) => {
     }
   }
 
+  const handleCopyBillingAddress = () => {
+      setAddress(billingAddress);
+      setFilterData(billingFilterData);
+  }
 
-  console.log("address Billing----------", address)
       return (
             <>
                   <div className="copy-billing-address">
                         <h3>Shipping Address</h3>
-                        <h5 onClick={() => setAddress(billingAddress)}>Copy Billing Address</h5>
+                        <h5 onClick={handleCopyBillingAddress}>Copy Billing Address</h5>
                   </div>
 
                   <div className="without-suggest">

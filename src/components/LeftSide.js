@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import fakeData from "./fakeData.json";
 
-const LeftSide = ({address, setAddress}) => {
+const LeftSide = ({address, setAddress, filterData, setFilterData}) => {
   const [countries, setCountries] = useState(fakeData);
 //   const [address, setAddress] = useState({});
   const [searchText, setSearchText] = useState("");
@@ -14,15 +14,15 @@ const LeftSide = ({address, setAddress}) => {
       zipcode: false,
       village: false
   })
-  const [filterData, setFilterData] = useState({
-      country: {},
-      state: {},
-      district: {},
-      city: {},
-      town: {},
-      zipcode: {},
-      village: {}
-  })
+//   const [filterData, setFilterData] = useState({
+//       country: {},
+//       state: {},
+//       district: {},
+//       city: {},
+//       town: {},
+//       zipcode: {},
+//       village: {}
+//   })
 
   // ------------------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------------------
@@ -33,36 +33,33 @@ const LeftSide = ({address, setAddress}) => {
   const handleResult = (item) => {
     setSearchText("");
     setCountries(fakeData);
-    // setFilterData({
-    //   country: {},
-    //   state: {},
-    //   district: {},
-    //   city: {},
-    //   town: {},
-    //   zipcode: {},
-    //   village: {}
-    // });
     
     if(item === "country"){
       setSuggestBox({...suggestBox, country: !suggestBox.country, state: false, district: false, city: false, town: false, zipcode: false, village: false});
     }
     if(item === "state"){
       setSuggestBox({...suggestBox, state: !suggestBox.state, country: false, district: false, city: false, town: false, zipcode: false, village: false});
+      setFilterData({...filterData, country: countries?.find(data => data.country === filterData?.country?.country)})
     }
     if(item === "district"){
       setSuggestBox({...suggestBox, district: !suggestBox.district, country: false, state: false, city: false, town: false, zipcode: false, village: false});
+      setFilterData({...filterData, state: filterData?.country?.state?.find(data => data.name === filterData?.state?.name)})
     }
     if(item === "city"){
       setSuggestBox({...suggestBox, city: !suggestBox.city, country: false, state: false, district: false, town: false, zipcode: false, village: false});
+      setFilterData({...filterData, district: filterData?.state?.district?.find(data => data.name === filterData?.district?.name)})
     }
     if(item === "town"){
       setSuggestBox({...suggestBox, town: !suggestBox.town, country: false, state: false, district: false, city: false, zipcode: false, village: false});
+      setFilterData({...filterData, city: filterData?.district?.city?.find(data => data.name === filterData?.city?.name)})
     }
     if(item === "zipcode"){
       setSuggestBox({...suggestBox, zipcode: !suggestBox.zipcode, country: false, state: false, district: false, city: false, town: false, village: false});
+      setFilterData({...filterData, town: filterData?.city?.town?.find(data => data.name === filterData?.town?.name)})
     }
     if(item === "village"){
       setSuggestBox({...suggestBox, village: !suggestBox.village, country: false, state: false, district: false, city: false, town: false, zipcode: false});
+      setFilterData({...filterData, zipcode: filterData?.town?.zipcode?.find(data => data.name === filterData?.zipcode?.name)})
     }
   }
 
@@ -114,12 +111,12 @@ const LeftSide = ({address, setAddress}) => {
     if(item === "country"){
       setAddress({ ...address, country: value, state: "", district: "", city: "", town: "", zipcode: "", village: ""})
       setSuggestBox({...suggestBox, country: false});
-      setFilterData({...filterData, country: countries.find(data => data.country === value)})
+      setFilterData({...filterData, country: countries?.find(data => data.country === value)})
     }
     else if(item === "state"){
       setAddress({...address, state: value, district: "", city: "", town: "", zipcode: "", village: ""})
       setSuggestBox({...suggestBox, state: false});
-      setFilterData({...filterData, state: filterData?.country?.state.find(data => data.name === value)})
+      setFilterData({...filterData, state: filterData?.country?.state?.find(data => data.name === value)})
     }
     else if(item === "district"){
       setAddress({...address, district: value, city: "", town: "", zipcode: "", village: ""})
@@ -171,7 +168,7 @@ const LeftSide = ({address, setAddress}) => {
     }
   }
 
-  console.log("address", address)
+//   console.log("address", address)
       return (
             <>
                 <h3>Billing Address</h3>

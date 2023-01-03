@@ -7,6 +7,15 @@ import RightSide from './components/RightSide';
 function App() {
 
   const [billingAddress, setBillingAddress] = useState({});
+  const [billingFilterData, setBillingFilterData] = useState({
+    country: {},
+    state: {},
+    district: {},
+    city: {},
+    town: {},
+    zipcode: {},
+    village: {}
+  })
 
   return (
     <div className="country-state-main-section">
@@ -21,12 +30,12 @@ function App() {
       <div className="country-state-container">
         {/* Billing address */}
         <div className="country-state-container-left">
-            <LeftSide address={billingAddress} setAddress={setBillingAddress}/>
+            <LeftSide address={billingAddress} setAddress={setBillingAddress} filterData={billingFilterData} setFilterData={setBillingFilterData}/>
         </div>
 
         {/* Shipping address */}
         <div className="country-state-container-right">
-            <RightSide billingAddress={billingAddress}/>
+            <RightSide billingAddress={billingAddress} billingFilterData={billingFilterData}/>
         </div>
       </div>
     </div>

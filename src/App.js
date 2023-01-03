@@ -38,6 +38,7 @@ function App() {
             <RightSide billingAddress={billingAddress} billingFilterData={billingFilterData}/>
         </div>
       </div>
+
     </div>
   );
 }

@@ -121,12 +121,23 @@ $color3: #eaeaea;
     .copy-billing-address{
       display: flex;
       align-items:center;
+      margin-bottom: -5px;
 
       h5{
         color: $color2;
         margin-left: 10px;
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width:992px) {
+  .country-state-main-section {
+    .country-state-container{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      // grid-gap: 50px;
     }
   }
 }

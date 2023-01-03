@@ -94,9 +94,17 @@
 .country-state-main-section .country-state-container .copy-billing-address {
   display: flex;
   align-items: center;
+  margin-bottom: -5px;
 }
 .country-state-main-section .country-state-container .copy-billing-address h5 {
   color: #157ed2;
   margin-left: 10px;
   cursor: pointer;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 992px) {
+  .country-state-main-section .country-state-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }/*# sourceMappingURL=App.css.map */

@@ -20,12 +20,14 @@
 .country-state-main-section .country-state-container .without-suggest input {
   width: 98%;
   margin: 0px 0px 10px;
-  padding: 10px;
+  padding: 8px 10px;
   background-color: #fff;
   border: none;
   outline: none;
   border-radius: 3px;
   cursor: pointer;
+  font-size: 15px;
+  color: #000;
   /* Firefox */
 }
 .country-state-main-section .country-state-container .without-suggest input::-webkit-outer-spin-button, .country-state-main-section .country-state-container .without-suggest input::-webkit-inner-spin-button {
@@ -106,5 +108,13 @@
   .country-state-main-section .country-state-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 450px) {
+  .country-state-main-section .country-state-container .copy-billing-address {
+    display: inline-block;
+  }
+  .country-state-main-section .country-state-container .copy-billing-address h5 {
+    margin: 0px 0px 20px;
   }
 }/*# sourceMappingURL=App.css.map */

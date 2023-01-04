@@ -35,12 +35,14 @@ $color3: #eaeaea;
       input{
         width: 98%;
         margin: 0px 0px 10px;
-        padding: 10px;
+        padding: 8px 10px;
         background-color: $color1;
         border: none;
         outline: none;
         border-radius: 3px;
         cursor: pointer;
+        font-size: 15px;
+        color: #000;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button { 
@@ -138,6 +140,20 @@ $color3: #eaeaea;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       // grid-gap: 50px;
+    }
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width:450px) {
+  .country-state-main-section {
+    .country-state-container{
+      .copy-billing-address{
+        display: inline-block;
+
+        h5{
+          margin: 0px 0px 20px;
+        }
+      }
     }
   }
 }
